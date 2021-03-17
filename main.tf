@@ -10,17 +10,17 @@ resource "azurerm_resource_group" "rg" {
 ## VNet Deployment with subnet
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "${var.prefix}-VNet"
+  name                = "vnet-appsvcplan"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  address_space       = ["10.0.0.0/16"]
+  address_space       = ["10.10.0.0/16"]
 }
 
 resource "azurerm_subnet" "subnet" {
   name                 = "subnetexample"
-  virtual_network_name = azurerm_virtual_network.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
   resource_group_name  = azurerm_resource_group.rg.name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = ["10.10.50.0/24"]
 }
 
 ## Deployment of Windows App Service Plan
